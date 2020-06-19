@@ -1,0 +1,65 @@
+<div class="col-md-16">
+  <form>
+    <div class="form-row">
+      <div class="col-md-3">
+        <input type="text" name="title" id="title" [(ngModel)]="newTask.title" placeholder="Title" class="form-control">
+      </div>
+      <div class="col-md-3">
+        <input type="text" name="desciption" id="description" [(ngModel)]="newTask.description" placeholder="Description" class="form-control">
+      </div>
+      <div class="col-md-3">
+        <input type="date" name="duedate" id="duedate" [(ngModel)]="newTask.dueDate" placeholder="Due date" class="form-control">
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary" (click)="createTask(newTask)">Add</button>
+      </div>
+    </div>
+  </form>
+  <div>
+    <table class = "table">
+      <thead class ="thead-dark">
+        <tr class="h">
+          <th scope="col" class="h">Title</th>
+          <th scope="col" class="h">Description</th>
+          <th scope="col" class="h">Due Date</th>
+          <th scope="col" class="h">Status</th>
+          <th scope="col" class="h">Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let task of toDoList">
+          <ng-container *ngIf="!editTasks.includes(task); else editTD"> 
+            <td>{{task.title}}</td>
+            <td>{{task.description}}</td>
+            <td>{{task.dueDate | date:'yyyy-MM-dd'}}</td>
+            <td>{{task.status}}</td>
+          </ng-container>     
+          <ng-template #editTD>
+            <td>
+              <input type="text" name="title" id="title" [(ngModel)]="task.title" placeholder="Title" class="form-control">
+            </td>
+            <td>
+              <input type="text" name="description" id="description" [(ngModel)]="task.description" placeholder="Description" class="form-control">
+            </td>
+            <td>
+              <input type="date" name="date" id="date" [(ngModel)]="task.dueDate" class="form-control">
+            </td>
+            <td>
+              <select name="status" id="status" [(ngModel)]="task.status" placeholder="Status" class="form-control" >
+                <option>pending</option>
+                <option>Done</option>
+              </select>
+            </td>
+          </ng-template> 
+          <td class="o">
+            <button class="btn btn-success" (click)="doneTask(task)">Done</button>
+            &nbsp;
+            <button class="btn btn-primary" (click)="editTask(task)">Edit</button>          
+            &nbsp;
+            <button class="btn btn-danger" (click)="deleteTask(task)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
