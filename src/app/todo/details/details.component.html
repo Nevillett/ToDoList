@@ -13,6 +13,9 @@
       <div class="col-md-2">
         <button type="submit" class="btn btn-primary" (click)="createTask(newTask)">Add</button>
       </div>
+      <div class="col-md-3">
+        <input type="text" name="search" id="search" [(ngModel)]="searchText" placeholder="search" class="form-control">
+      </div>
     </div>
   </form>
   <div>
@@ -27,7 +30,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr  *ngFor="let task of toDoList">
+        <tr  *ngFor="let task of toDoList | search: searchText">
           <ng-container *ngIf="!editTasks.includes(task); else editTD"> 
             <td>{{task.title}}</td>
             <td>{{task.description}}</td>
