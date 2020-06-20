@@ -11,6 +11,7 @@ export class DetailsComponent implements OnInit {
 
   constructor() { }
 
+  searchText = "";
   public newTask: Task = new Task();
   editTasks: Task[] = [];
   // toDoList: Task[];
