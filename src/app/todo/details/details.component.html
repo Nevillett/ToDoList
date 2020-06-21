@@ -19,18 +19,20 @@
     </div>
   </form>
   <div>
-    <table class = "table">
+    <table class = "table table-hover">
       <thead class ="thead-dark">
-        <tr class="h">
-          <th scope="col" class="h">Title</th>
-          <th scope="col" class="h">Description</th>
-          <th scope="col" class="h">Due Date</th>
-          <th scope="col" class="h">Status</th>
-          <th scope="col" class="h">Options</th>
+        <tr>
+          <th scope="col" > #</th>
+          <th scope="col" >Title</th>
+          <th scope="col" >Description</th>
+          <th scope="col" >Due Date</th>
+          <th scope="col" >Status</th>
+          <th scope="col" >Options</th>
         </tr>
       </thead>
       <tbody>
-        <tr  *ngFor="let task of toDoList | search: searchText">
+        <tr *ngFor="let task of toDoList | search: searchText ; index as i">
+            <td>{{i + 1}}</td>
           <ng-container *ngIf="!editTasks.includes(task); else editTD"> 
             <td>{{task.title}}</td>
             <td>{{task.description}}</td>
@@ -57,7 +59,8 @@
           <td class="o">
             <button class="btn btn-success" (click)="doneTask(task)">Done</button>
             &nbsp;
-            <button class="btn btn-primary" (click)="editTask(task)">Edit</button>          
+            <button class="btn btn-primary" (click)="editTask(task)" *ngIf="!task.editFlag">Edit</button>  
+            <button class="btn btn-primary" (click)="editTask(task)" *ngIf="task.editFlag">Save</button>                  
             &nbsp;
             <button class="btn btn-danger" (click)="deleteTask(task)">Delete</button>
           </td>

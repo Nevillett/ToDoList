@@ -20,7 +20,6 @@ import { DetailsComponent } from './todo/details/details.component';
     FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  //exports: [SearchPipe] 
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
